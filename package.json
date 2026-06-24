@@ -1,0 +1,15 @@
+{
+  "name": "staffservice",
+  "private": true,
+  "scripts": {
+    "css:build": "stylus assets/css/style.styl -o assets/css/",
+    "css:watch": "stylus -w assets/css/style.styl -o assets/css/",
+    "serve": "live-server --port=3000 --open=index.html --watch=index.html,assets --ignore=assets/css/style.styl",
+    "dev": "concurrently -k -n stylus,server -c blue,green \"npm run css:watch\" \"npm run serve\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "live-server": "^1.2.2",
+    "stylus": "^0.63.0"
+  }
+}
