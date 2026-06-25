@@ -2,8 +2,8 @@
   "name": "staffservice",
   "private": true,
   "scripts": {
-    "css:build": "stylus assets/css/style.styl -o assets/css/",
-    "css:watch": "stylus -w assets/css/style.styl -o assets/css/",
+    "css:build": "node scripts/stylus-watch.js --once",
+    "css:watch": "node scripts/stylus-watch.js",
     "serve": "live-server --port=3000 --open=index.html --watch=index.html,assets --ignore=assets/css/style.styl",
     "dev": "concurrently -k -n stylus,server -c blue,green \"npm run css:watch\" \"npm run serve\""
   },

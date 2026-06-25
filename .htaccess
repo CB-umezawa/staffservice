@@ -1,0 +1,12 @@
+AuthType Basic
+AuthName "Member Only"
+AuthUserFile /home/crossbench01/staging-space-cb.com/public_html/staffservice.staging-space-cb.com/.htpasswd
+require valid-user
+Options +Includes
+AddHandler server-parsed html
+
+<Files "xmlrpc.php">
+Satisfy any
+order allow,deny
+allow from all
+</Files>

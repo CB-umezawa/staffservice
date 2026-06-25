@@ -112,6 +112,7 @@ font-family: sans-serif;
 //break point
 RES_WID_EXTRA_SMALL01 = 576px
 RES_WID_SMALL01 = 768px
+RES_WID_PC01 = 769px
 RES_WID_MEDIUM01 = 1000px
 RES_WID_LARGE01 = 1180px
 RES_WID_LARGE02 = 1200px
@@ -126,7 +127,7 @@ $HEADER_H = 70px
 DF_FONT = 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", "游ゴシック", YuGothic, "游ゴシック体", "メイリオ", sans-serif
 DF_FONT_MIN = "游明朝" , "Yu Mincho" , "游明朝体" , "YuMincho" ,"Hiragino Mincho Pro" , "ヒラギノ明朝 Pro W3" , "HiraMinProN-W3" ,  "HGS明朝E" , "ＭＳ Ｐ明朝" , "MS PMincho" , serif;
 
-DF_FONT_EN = "Arial", sans-serif;
+DF_FONT_EN = "Roboto", sans-serif;
 
 //color
 DF_BG_COLOR = #fff //背景色
@@ -167,7 +168,13 @@ MQ_MIN_MAX(minWidth,maxWidth){
 	@media screen and (min-width:minWidth) and (max-width:maxWidth) {
 		{block}
 	}
+
 }
+
+MQ_HOVER()
+	+MQ_MIN(RES_WID_PC01)
+		&:hover
+			{block}
 
 CF()
 	+cache('clearfix')
@@ -191,7 +198,7 @@ fontSize(size) {
 }
 
 vwsp(size)
-	rate = 100 / 320;
+	rate = 100 / 375;
 	return rate * size * 1vw
 
 vwpc(size)
@@ -271,6 +278,9 @@ body
 		width 100%
 		min-width 0
 
+	&.is-header02Open
+		overflow hidden
+
 a
 	color inherit
 	text-decoration none !important
@@ -279,7 +289,7 @@ a
 		text-decoration underline
 	&:active
 		text-decoration none
-	&:hover
+	+MQ_HOVER()
 		text-decoration none
 	&:focus
 		outline none
@@ -310,6 +320,9 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	padding 0 vwpc(50)
 	box-sizing border-box
 	width 100%
+	+MQ_MAX(RES_WID_SMALL01)
+		max-width 100% !important
+		padding 0 vwsp(20)
 	&.is-narrow
 		max-width $CONTENTS_WID_SMALL01
 
@@ -337,21 +350,27 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	display flex
 	align-items center
 	gap vwpc(13)
-	fontPc(14)
 	font-weight 600
 	line-height 1.5
 	letter-spacing 0.04em
+	+MQ_MAX(RES_WID_SMALL01)
+		gap vwsp(13)
 	&:before
 		content ''
 		display inline-block
 		width vwpc(60)
 		height vwpc(3)
 		background-color SITE_COLOR01
+		+MQ_MAX(RES_WID_SMALL01)
+			width vwsp(50)
+			height vwsp(3)
 	span
 		fontPc(18)
 		font-weight 700
 		line-height 1.8
 		letter-spacing 0.04em
+		+MQ_MAX(RES_WID_SMALL01)
+			fontSp(16)
 	&.is-white
 		color #fff
 		&:before
@@ -363,6 +382,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 		font-weight 700
 		line-height 1.5
 		letter-spacing 0.04em
+		+MQ_MAX(RES_WID_SMALL01)
+			fontSp(22)
 	&.is-white
 		span
 			color #fff
@@ -378,7 +399,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				color SITE_COLOR01
 			&:after
 				background-image url('../images/common/common_arrow01_blue.png')
-			&:hover
+			+MQ_HOVER()
 				background-color SITE_COLOR01
 				color #fff
 				span
@@ -396,7 +417,12 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 		box-sizing border-box
 		border-radius vwpc(8)
 		transition background-color .3s, color .3s
-		&:hover
+		+MQ_MAX(RES_WID_SMALL01)
+			padding vwsp(14) vwsp(54) vwsp(14) vwsp(20)
+			min-width vwsp(160)
+			border-width vwsp(1)
+			border-radius vwsp(8)
+		+MQ_HOVER()
 			background-color #fff
 			color SITE_COLOR01
 			span
@@ -418,6 +444,10 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			background-repeat no-repeat
 			background-position center
 			transition background-image .3s
+			+MQ_MAX(RES_WID_SMALL01)
+				right vwsp(20)
+				width vwsp(14)
+				height vwsp(12)
 		span
 			color #fff
 			fontPc(16)
@@ -425,6 +455,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			line-height 1.5
 			letter-spacing 0.04em
 			transition color .3s
+			+MQ_MAX(RES_WID_SMALL01)
+				fontSp(16)
 
 
 
@@ -442,7 +474,12 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 		box-sizing border-box
 		border-radius vwpc(8)
 		transition background-color .3s, color .3s
-		&:hover
+		+MQ_MAX(RES_WID_SMALL01)
+			padding vwsp(14) vwsp(54) vwsp(14) vwsp(20)
+			min-width vwsp(160)
+			border-width vwsp(1)
+			border-radius vwsp(8)
+		+MQ_HOVER()
 			background-color DF_TEXT_COLOR
 			&:after
 				background-image url('../images/common/common_arrow01_white.png')
@@ -458,6 +495,14 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			background-repeat no-repeat
 			background-position center
 			transition background-image .3s
+			+MQ_MAX(RES_WID_SMALL01)
+				position absolute
+				top 0
+				right vwsp(20)
+				bottom 0
+				margin auto 0
+				width vwsp(14)
+				height vwsp(12)
 		span
 			color DF_TEXT_COLOR
 			fontPc(16)
@@ -465,6 +510,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			line-height 1.5
 			letter-spacing 0.04em
 			transition color .3s
+			+MQ_MAX(RES_WID_SMALL01)
+				fontSp(16)
 
 
 
@@ -479,7 +526,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			.moduleInner
 				span
 					color SITE_COLOR01
-			&:hover
+			+MQ_HOVER()
 				background-color SITE_COLOR01
 				color #fff
 				&:after
@@ -501,6 +548,11 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 		border vwpc(1) solid SITE_COLOR01
 		box-sizing border-box
 		transition background-color .3s, color .3s
+		+MQ_MAX(RES_WID_SMALL01)
+			justify-content flex-start
+			min-height 0
+			padding vwsp(14) vwsp(54) vwsp(14) vwsp(20)
+			border-radius vwsp(8)
 		&:after
 			content ''
 			display inline-block
@@ -515,7 +567,11 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			background-size contain
 			background-repeat no-repeat
 			transition background-image .3s
-		&:hover
+			+MQ_MAX(RES_WID_SMALL01)
+				right vwsp(20)
+				width vwsp(14)
+				height vwsp(12)
+		+MQ_HOVER()
 			background-color #fff
 			.moduleInner
 				span
@@ -531,13 +587,16 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				font-weight bold
 				line-height 1.5
 				letter-spacing 0.04em
+				+MQ_MAX(RES_WID_SMALL01)
+					fontSp(14)
 
 
 // ------------------------- component -------------------------
 
 .c-header01
 	background-color SITE_BG01
-
+	+MQ_MAX(RES_WID_SMALL01)
+		display none
 	.group
 		&.is-contents
 			display flex
@@ -559,7 +618,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 					display block
 					transition opacity .3s
 
-					&:hover
+					+MQ_HOVER()
 						opacity 0.7
 
 				.img
@@ -592,7 +651,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 										justify-content center
 										height vwpc(70)
 										padding 0 vwpc(20)
-										color DF_TEXT_COLOR
+										color #666
 										fontPc(12)
 										font-weight bold
 										white-space nowrap
@@ -600,9 +659,20 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 
 									> .link
 										&:link, &:visited
-											color DF_TEXT_COLOR
+											color #666
 
-									&:hover,
+									+MQ_HOVER()
+										background-color SITE_COLOR01
+
+										> .label,
+										> .link
+											color #fff
+
+										> .link
+											&:link, &:visited
+												color #fff
+												text-decoration none
+
 									&.is-current,
 									&.is-open
 										background-color SITE_COLOR01
@@ -664,7 +734,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 											&:link, &:visited
 												color SITE_COLOR01
 
-											&:hover
+											+MQ_HOVER()
 												opacity 0.7
 
 								&.is-body
@@ -686,7 +756,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 											&:link, &:visited
 												color DF_TEXT_COLOR
 
-											&:hover
+											+MQ_HOVER()
 												color SITE_COLOR01
 
 		&.is-contact
@@ -697,6 +767,208 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 					display flex
 					align-items center
 					gap vwpc(8)
+
+
+.c-header02
+	display none
+	background-color SITE_BG01
+	+MQ_MAX(RES_WID_SMALL01)
+		display block
+
+	&.is-active
+		.group
+			&.is-head
+				position relative
+				z-index 110
+			&.is-nav
+				visibility visible
+				opacity 1
+				pointer-events auto
+				transform translate3d(0, 0, 0)
+		.block
+			&.is-logo
+				visibility hidden
+				opacity 0
+			&.is-menu
+				.btn
+					background-image url('../images/common/common_header_menu02.png')
+
+	.componentWrapper
+		position relative
+
+	.group
+		&.is-head
+			display flex
+			align-items center
+			justify-content space-between
+			padding vwsp(10) vwsp(14)
+			height vwsp(70)
+			box-sizing border-box
+
+		&.is-nav
+			visibility hidden
+			opacity 0
+			pointer-events none
+			position fixed
+			top 0
+			left 0
+			z-index 100
+			width 100%
+			height 100svh
+			padding vwsp(70) vwsp(20) vwsp(20)
+			background-color SITE_BG01
+			box-sizing border-box
+			transform translate3d(0, -100svh, 0)
+			transition transform .3s ease, opacity .3s ease, visibility .3s ease
+			display flex
+			flex-direction column
+			gap vwsp(40)
+			overflow hidden
+
+	.block
+		&.is-logo
+			flex-shrink 0
+
+			.logo
+				width vwsp(240)
+				line-height 1
+
+				.link
+					display block
+
+				.img
+					display block
+					width 100%
+					height auto
+
+		&.is-menu
+			.btn
+				display block
+				position relative
+				width vwsp(30)
+				height vwsp(30)
+				background-image url('../images/common/common_header_menu01.png')
+				background-size contain
+				background-repeat no-repeat
+				background-position center
+				cursor pointer
+				transition background-image .3s
+
+		&.is-nav
+			overflow-y auto
+			-webkit-overflow-scrolling touch
+
+			.area
+				&.is-list
+					display flex
+					flex-direction column
+					gap vwsp(10)
+					.box
+						&.is-accordion
+
+							> .item
+								&.is-contents
+									&.is-active
+										> .headBlock.is-head
+											background-color #ECF7FE
+											&:before
+												background-color SITE_COLOR01
+											&:after
+												background-image url('../images/common/common_arrow02_blue.png')
+												transform rotate(-90deg)
+
+									.headBlock
+										&.is-head
+											position relative
+											padding vwsp(10) vwsp(40) vwsp(10) vwsp(14)
+											box-sizing border-box
+											cursor pointer
+											&:before
+												content ''
+												display inline-block
+												position absolute
+												bottom 0
+												left 0
+												width 100%
+												height vwsp(1)
+												background-color DF_TEXT_COLOR
+											&:after
+												content ''
+												display inline-block
+												position absolute
+												top 0
+												right vwsp(14)
+												bottom 0
+												margin auto 0
+												width vwsp(16)
+												height vwsp(16)
+												background-image url('../images/common/common_arrow02.png')
+												background-size contain
+												background-repeat no-repeat
+												background-position center
+												transform-origin center
+												transform rotate(90deg)
+
+											.title
+												fontSp(16)
+												font-weight 700
+												line-height 1.5
+												letter-spacing 0.04em
+
+									.bodyBlock
+										&.is-body
+											display none
+											padding 0 vwsp(20) 0
+
+											.linkArea
+												margin-top vwsp(10)
+												&.is-list
+													display flex
+													flex-direction column
+													gap vwsp(6)
+													.linkBox
+														&.is-link
+															.link
+																display block
+																position relative
+																padding vwsp(3) 0
+																color DF_TEXT_COLOR
+																fontSp(12)
+																font-weight 500
+																line-height 1.7
+																letter-spacing 0.04em
+																&:after
+																	content ''
+																	display inline-block
+																	position absolute
+																	top 0
+																	right 0
+																	bottom 0
+																	width vwsp(10)
+																	height vwsp(10)
+																	background-image url('../images/common/common_arrow02.png')
+																	background-size contain
+																	background-repeat no-repeat
+																	background-position center
+																&:link,
+																&:visited
+																	color DF_TEXT_COLOR
+																	text-decoration none
+
+		&.is-contact
+			box-sizing border-box
+
+			.area
+				&.is-contact
+					.box
+						&.is-list
+							display flex
+							flex-direction column
+							gap vwsp(8)
+
+							.item
+								&.is-btn
+									width 100%
 
 
 .c-topMainvisualSet01
@@ -719,6 +991,10 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				left 50%
 				transform translate(-50%, -50%)
 				width 100%
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(7)
+					padding 0 vwsp(16)
+					transform translate(-50%, -75%)
 				.block
 					&.is-title
 						.title
@@ -727,14 +1003,23 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 							font-family DF_FONT_MIN
 							font-weight 600
 							line-height 1.5
+							letter-spacing 0.06em
 							text-shadow 0 0 vwpc(20) rgba(43, 43, 43, 0.28)
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(35)
+								line-height 1.3
+								text-shadow 0 0 vwsp(20) rgba(43, 43, 43, 0.28)
 					&.is-text
 						.text
 							color #fff
 							fontPc(16)
-							font-weight bold
+							font-weight 700
 							line-height 1.8
 							text-shadow 0 0 vwpc(20) rgba(43, 43, 43, 0.28)
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(14)
+								font-weight 500
+								text-shadow 0 0 vwsp(20) rgba(43, 43, 43, 0.28)
 			&.is-link
 				display flex
 				flex-direction column
@@ -745,17 +1030,26 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				position absolute
 				right 0
 				bottom vwpc(60)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
+					max-width vwsp(240)
+					bottom vwsp(80)
+
 				.block
 					&.is-link
 						max-width vwpc(240)
 						width 100%
+						+MQ_MAX(RES_WID_SMALL01)
+							max-width vwsp(200)
 						&.is-type01
 							max-width vwpc(280)
+							+MQ_MAX(RES_WID_SMALL01)
+								max-width vwsp(240)
 							.area
 								&.is-inner
 									border-color SITE_COLOR01
 									background-color SITE_COLOR01
-									&:hover
+									+MQ_HOVER()
 										span
 											color SITE_COLOR01
 						&.is-type02
@@ -763,7 +1057,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								&.is-inner
 									border-color SITE_COLOR02
 									background-color SITE_COLOR02
-									&:hover
+									+MQ_HOVER()
 										span
 											color SITE_COLOR02
 						&.is-type03
@@ -771,7 +1065,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								&.is-inner
 									border-color SITE_COLOR03
 									background-color SITE_COLOR03
-									&:hover
+									+MQ_HOVER()
 										span
 											color SITE_COLOR03
 						.area
@@ -788,7 +1082,12 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								box-sizing border-box
 								border-radius vwpc(100) 0 0 vwpc(100)
 								transition background-color .3s
-								&:hover
+								+MQ_MAX(RES_WID_SMALL01)
+									gap vwsp(3)
+									padding vwsp(10) vwsp(20)
+									border-width vwsp(1) 0 vwsp(1) vwsp(1)
+									border-radius vwsp(100) 0 0 vwsp(100)
+								+MQ_HOVER()
 									background-color #fff !important
 								span
 									color #fff
@@ -798,27 +1097,42 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									&.large
 										fontPc(20)
 										font-weight 600
+										+MQ_MAX(RES_WID_SMALL01)
+											fontSp(16)
 									&.small
 										fontPc(12)
 										font-weight 300
+										+MQ_MAX(RES_WID_SMALL01)
+											fontSp(12)
 
 .c-topBusinessSet01
 	padding vwpc(80) 0
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(40)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(20)
 		.group
 			&.is-title
 				display flex
 				flex-direction column
 				gap vwpc(14)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
 			&.is-contents
 				display grid
 				grid-template-columns repeat(3, 1fr)
+				grid-template-rows repeat(4, auto)
 				gap vwpc(20)
+				+MQ_MAX(RES_WID_SMALL01)
+					grid-template-columns 1fr
+					grid-template-rows none
+					gap vwsp(20)
 				.block
 					&.is-list
 						display grid
@@ -828,27 +1142,46 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 						width 100%
 						border vwpc(2) solid
 						box-sizing border-box
+						+MQ_MAX(RES_WID_SMALL01)
+							display flex
+							flex-direction column
+							gap vwsp(26)
+							grid-row auto
+							padding vwsp(18) 0 vwsp(31)
+							border-width vwsp(2)
 						.area
-							&.is-title
-								display flex
+							&.is-text
+								display grid
+								grid-template-rows subgrid
+								grid-row span 2
+								gap vwpc(10)
 								align-items center
-								justify-content center
+								justify-items center
+								+MQ_MAX(RES_WID_SMALL01)
+									display flex
+									flex-direction column
+									grid-row auto
+									gap vwsp(10)
 								.title
+									width 100%
 									fontPc(24)
 									font-weight 700
 									line-height 1.5
 									letter-spacing 0.04em
 									text-align center
-							&.is-text
-								display flex
-								align-items center
-								justify-content center
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(20)
+									span
+										display inline
 								.text
+									width 100%
 									fontPc(13)
 									font-weight 700
 									line-height 1.5
 									letter-spacing 0.04em
 									text-align center
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(14)
 							&.is-link
 								display flex
 								flex-direction column
@@ -856,12 +1189,16 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									&.is-link
 										width 100%
 										border-bottom vwpc(1) solid #eee
+										+MQ_MAX(RES_WID_SMALL01)
+											border-bottom-width vwsp(1)
 										.inner
 											display block
 											position relative
 											padding vwpc(14) vwpc(40) vwpc(14) vwpc(16)
 											transition opacity .3s
-											&:hover
+											+MQ_MAX(RES_WID_SMALL01)
+												padding vwsp(10) vwsp(40) vwsp(10) vwsp(16)
+											+MQ_HOVER()
 												opacity 0.7
 											&:after
 												content ''
@@ -877,11 +1214,17 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 												right vwpc(16)
 												bottom 0
 												margin auto 0
+												+MQ_MAX(RES_WID_SMALL01)
+													width vwsp(16)
+													height vwsp(16)
+													right vwsp(16)
 											span
 												color DF_TEXT_COLOR
 												fontPc(16)
 												line-height 1.5
 												letter-spacing 0.04em
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(16)
 							&.is-btn
 								display flex
 								align-items center
@@ -889,6 +1232,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								.btn
 									max-width vwpc(320)
 									width 100%
+									+MQ_MAX(RES_WID_SMALL01)
+										max-width vwsp(320)
 									.inner
 										display flex
 										align-items center
@@ -899,6 +1244,11 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 										border-radius vwpc(8)
 										box-sizing border-box
 										transition background-color .3s, color .3s
+										+MQ_MAX(RES_WID_SMALL01)
+											gap vwsp(20)
+											padding vwsp(14) vwsp(20)
+											border-width vwsp(1)
+											border-radius vwsp(8)
 										span
 											color #fff
 											line-height 1.5
@@ -907,15 +1257,18 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 											&.large
 												fontPc(16)
 												font-weight 700
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(16)
 											&.small
 												fontPc(12)
-
-										&:hover
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(12)
+										+MQ_HOVER()
 											background-color #fff !important
 						&.is-type01
 							border-color SITE_COLOR01
 							.area
-								&.is-title
+								&.is-text
 									.title
 										color SITE_COLOR01
 								&.is-btn
@@ -923,13 +1276,13 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 										.inner
 											background-color SITE_COLOR01
 											border-color SITE_COLOR01
-											&:hover
+											+MQ_HOVER()
 												span
 													color SITE_COLOR01
 						&.is-type02
 							border-color SITE_COLOR02
 							.area
-								&.is-title
+								&.is-text
 									.title
 										color SITE_COLOR02
 								&.is-btn
@@ -937,13 +1290,13 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 										.inner
 											background-color SITE_COLOR02
 											border-color SITE_COLOR02
-											&:hover
+											+MQ_HOVER()
 												span
 													color SITE_COLOR02
 						&.is-type03
 							border-color SITE_COLOR03
 							.area
-								&.is-title
+								&.is-text
 									.title
 										color SITE_COLOR03
 								&.is-btn
@@ -951,7 +1304,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 										.inner
 											background-color SITE_COLOR03
 											border-color SITE_COLOR03
-											&:hover
+											+MQ_HOVER()
 												span
 													color SITE_COLOR03
 
@@ -960,9 +1313,14 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	padding vwpc(80) 0
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(80) 0 vwsp(40)
 	.componentWrapper
 		display flex
 		gap vwpc(30)
+		+MQ_MAX(RES_WID_SMALL01)
+			flex-direction column
+			gap vwsp(30)
 		.group
 			&.is-contents
 				flex 1
@@ -970,11 +1328,16 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				flex-direction column
 				gap vwpc(40)
 				width vwpc(642)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(20)
+					width 100%
 				.block
 					&.is-title
 						display flex
 						flex-direction column
 						gap vwpc(40)
+						+MQ_MAX(RES_WID_SMALL01)
+							gap vwsp(20)
 						.title
 							span
 								color SITE_COLOR01
@@ -983,19 +1346,29 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								font-weight 600
 								line-height 1.5
 								letter-spacing 0.04em
+								+MQ_MAX(RES_WID_SMALL01)
+									fontSp(35)
 					&.is-text
 						display flex
 						flex-direction column
 						gap vwpc(36)
+						+MQ_MAX(RES_WID_SMALL01)
+							gap vwsp(28.8)
 						.text
 							fontPc(20)
 							line-height 1.8
 							letter-spacing 0.04em
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(16)
 					&.is-btn
 						display flex
+						+MQ_MAX(RES_WID_SMALL01)
+							justify-content center
 			&.is-image
 				width vwpc(498)
 				flex-shrink 0
+				+MQ_MAX(RES_WID_SMALL01)
+					width 100%
 				.block
 					&.is-image
 						width 100%
@@ -1015,19 +1388,32 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	background-repeat no-repeat
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
+		background-image url('../images/contents/top/top_achievements_bg01_sp.png')
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(40)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(20)
 		.group
 			&.is-title
 				display flex
 				flex-direction column
 				gap vwpc(10)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
 			&.is-contents
 				display grid
 				grid-template-columns repeat(4, 1fr)
 				gap vwpc(4)
+				+MQ_MAX(RES_WID_SMALL01)
+					grid-template-columns 1fr
+					grid-template-rows none
+					gap vwsp(4)
+					width vwsp(300)
+					margin 0 auto
 				.block
 					&.is-list
 						display flex
@@ -1043,11 +1429,17 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								flex 1
 								padding vwpc(30) vwpc(20)
 								box-sizing border-box
+								+MQ_MAX(RES_WID_SMALL01)
+									padding vwsp(16) 0 0
+									flex-direction column-reverse
+									gap vwsp(20)
 								.note
 									color #fff
 									fontPc(11)
 									line-height 1.5
 									text-align center
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(11)
 							&.is-contents
 								display flex
 								flex-direction column
@@ -1058,45 +1450,66 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								padding vwpc(30) vwpc(20)
 								background-color #fff
 								box-sizing border-box
+								+MQ_MAX(RES_WID_SMALL01)
+									gap vwsp(10)
+									padding vwsp(20)
 								.box
-									&.is-icon
-										width 100%
+									&.is-achievements
+										display flex
+										flex-direction column
+										align-items center
+										gap vwpc(20)
+										+MQ_MAX(RES_WID_SMALL01)
+											flex-direction row
+											gap vwsp(10)
 										.icon
 											width 100%
+											+MQ_MAX(RES_WID_SMALL01)
+												width vwsp(50)
 											img
 												width 100%
 												height auto
 												vertical-align bottom
-									&.is-achievements
-										display flex
-										justify-content center
 										.achievements
 											display flex
 											align-items flex-end
 											gap vwpc(4)
+											+MQ_MAX(RES_WID_SMALL01)
+												gap vwsp(4)
 											.number
 												color SITE_COLOR01
 												fontPc(64)
 												font-family DF_FONT_EN
 												font-weight 700
 												line-height vwpc(54)
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(46)
+													line-height vwsp(54)
 											.unit
 												fontPc(22)
 												font-weight 700
 												line-height 1.5
 												letter-spacing -0.0162em
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(18)
 									&.is-text
 										display flex
 										flex-direction column
 										gap vwpc(10)
+										+MQ_MAX(RES_WID_SMALL01)
+											gap vwsp(10)
 										.title
 											fontPc(14)
 											font-weight 700
 											line-height 1.3
 											text-align center
+											+MQ_MAX(RES_WID_SMALL01)
+												fontSp(20)
 										.text
 											fontPc(11)
 											line-height 1.5
+											+MQ_MAX(RES_WID_SMALL01)
+												fontSp(14)
 
 
 .c-topCompanySet01
@@ -1104,24 +1517,36 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	background-color SITE_BG02
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(40)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(20)
 		.group
 			&.is-title
 				display flex
 				flex-direction column
 				gap vwpc(14)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
 			&.is-contents
 				display flex
 				flex-direction column
 				gap vwpc(40)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(20)
 				.block
 					&.is-list
 						display grid
 						grid-template-columns repeat(5, 1fr)
 						gap vwpc(40) vwpc(20)
+						+MQ_MAX(RES_WID_SMALL01)
+							grid-template-columns 1fr
+							grid-template-rows none
+							gap vwsp(20)
 						.area
 							&.is-contents
 								display flex
@@ -1129,16 +1554,26 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								justify-content space-between
 								padding vwpc(20) vwpc(10)
 								background-color #fff
+								+MQ_MAX(RES_WID_SMALL01)
+									flex-direction column
+									gap vwsp(20)
+									padding vwsp(20)
 								.box
 									&.is-contents
 										display flex
 										flex-direction column
 										gap vwpc(9)
+										+MQ_MAX(RES_WID_SMALL01)
+											gap vwsp(9)
 										.item
 											&.is-title
 												.title
 													display flex
 													flex-direction column
+													+MQ_MAX(RES_WID_SMALL01)
+														flex-direction row
+														align-items center
+														gap vwsp(10)
 													span
 														&.large
 															color SITE_COLOR01
@@ -1147,43 +1582,65 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 															font-weight 700
 															line-height 1.5
 															letter-spacing 0.04em
+															+MQ_MAX(RES_WID_SMALL01)
+																fontSp(40)
 														&.middle
 															fontPc(20)
 															font-weight 700
 															line-height 1.5
 															letter-spacing 0.04em
+															+MQ_MAX(RES_WID_SMALL01)
+																fontSp(20)
 											&.is-text
 												.text
 													fontPc(14)
 													line-height 1.6
+													+MQ_MAX(RES_WID_SMALL01)
+														fontSp(16)
 								&.is-large
 									grid-column 1 / -1
-									align-items flex-start
 									padding vwpc(20)
+									+MQ_MAX(RES_WID_SMALL01)
+										align-items flex-start
+										padding vwsp(20)
 									.box
 										&.is-contents
 											width vwpc(533)
+											+MQ_MAX(RES_WID_SMALL01)
+												width 100%
 											.item
 												&.is-title
 													.title
 														flex-direction row
 														align-items center
 														gap vwpc(10)
+														+MQ_MAX(RES_WID_SMALL01)
+															gap vwsp(10)
 														span
 															font-weight 700
 															&.large
 																fontPc(64)
+																+MQ_MAX(RES_WID_SMALL01)
+																	fontSp(40)
 															&.middle
 																color SITE_COLOR01
 																fontPc(32)
+																+MQ_MAX(RES_WID_SMALL01)
+																	fontSp(20)
 															&.small
 																fontPc(15)
+																+MQ_MAX(RES_WID_SMALL01)
+																	fontSp(15)
 												&.is-text
 													.text
 														fontPc(15)
 														line-height 1.8
+														+MQ_MAX(RES_WID_SMALL01)
+															fontSp(16)
 										&.is-image
 											width vwpc(522)
+											+MQ_MAX(RES_WID_SMALL01)
+												width 100%
 											.image
 												width 100%
 												img
@@ -1199,12 +1656,18 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	background-color SITE_BG02
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
 	.componentWrapper
 		.group
 			&.is-contents
 				display grid
 				grid-template-columns repeat(3, 1fr)
 				gap vwpc(20)
+				+MQ_MAX(RES_WID_SMALL01)
+					grid-template-columns 1fr
+					grid-template-rows none
+					gap vwsp(10)
 				.block
 					&.is-btn
 						.m-btn02
@@ -1219,23 +1682,39 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	background-repeat no-repeat
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
+		background-image url('../images/contents/top/top_network_bg01_sp.png')
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(50)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(50)
 		.group
 			&.is-title
 				display flex
 				flex-direction column
 				gap vwpc(14)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
 				.text
 					padding-top vwpc(15)
+					fontPc(16)
+					+MQ_MAX(RES_WID_SMALL01)
+						padding-top vwsp(20)
+						fontSp(16)
 			&.is-contents
 				display flex
 				align-items flex-start
 				gap vwpc(30)
 				padding vwpc(40) vwpc(20)
 				box-sizing border-box
+				background-color #fff
+				+MQ_MAX(RES_WID_SMALL01)
+					flex-direction column
+					gap vwsp(20)
+					padding vwsp(40) 0 0
 				.block
 					&.is-contents
 						display flex
@@ -1244,71 +1723,218 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 						padding vwpc(20) vwpc(12) vwpc(20) vwpc(0)
 						border-right 2px solid SITE_COLOR01
 						box-sizing border-box
+						+MQ_MAX(RES_WID_SMALL01)
+							gap vwsp(20)
+							padding 0 0 vwsp(20)
+							width 100%
+							border-right none
+							border-bottom vwsp(2) solid SITE_COLOR01
 						.area
 							&.is-title
 								.title
 									display flex
 									flex-direction column
 									gap vwpc(20)
+									+MQ_MAX(RES_WID_SMALL01)
+										flex-direction row
+										flex-wrap wrap
+										align-items center
+										gap vwsp(10)
 									span
 										font-weight 700
 										&.small
 											fontPc(20)
 											line-height 1.5
+											+MQ_MAX(RES_WID_SMALL01)
+												fontSp(20)
 											&.blue
 												color SITE_COLOR01
+												+MQ_MAX(RES_WID_SMALL01)
+													display block
+													width 100%
 										&.large
 											color SITE_COLOR01
 											fontPc(128)
 											line-height 0.8
 											font-family DF_FONT_EN
 											letter-spacing: 0.04em
+											+MQ_MAX(RES_WID_SMALL01)
+												fontSp(80)
 							&.is-text
 								.text
 									fontPc(15)
 									line-height 1.8
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(15)
 
-					&.is-image
+					&.is-map
+						position relative
 						width vwpc(852)
-						.image
+						+MQ_MAX(RES_WID_SMALL01)
 							width 100%
-							img
+						.area
+							&.is-map
 								width 100%
+								.box
+									&.is-image
+										.image
+											width 100%
+											img
+												width 100%
+							&.is-base
+								position absolute
+								top 0
+								left 0
+								width 100%
+								height 100%
+								.box
+									&.is-base
+										display block
+										min-width vwpc(126)
+										position absolute
+										border-radius vwpc(10)
+										overflow hidden
+										box-shadow 0 0 vwpc(14) rgba(157, 178, 217, 0.5)
+										+MQ_MAX(RES_WID_SMALL01)
+											min-width vwsp(90)
+											border-radius vwsp(10)
+											box-shadow 0 0 vwsp(14) rgba(157, 178, 217, 0.5)
+										&:nth-of-type(1)
+											top vwpc(142)
+											right vwpc(0)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(5)
+												right vwsp(127)
+										&:nth-of-type(2)
+											top vwpc(292)
+											right vwpc(53)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(118)
+												right vwsp(202)
+										&:nth-of-type(3)
+											top vwpc(423)
+											right vwpc(114)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(414)
+												right vwsp(0)
+										&:nth-of-type(4)
+											top vwpc(480)
+											right vwpc(347)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(589)
+												right vwsp(27)
+										&:nth-of-type(5)
+											top vwpc(200)
+											left vwpc(226)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(467)
+												left vwsp(69)
+										&:nth-of-type(6)
+											top vwpc(295)
+											left vwpc(80)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(236)
+												left vwsp(0)
+										&:nth-of-type(7)
+											top vwpc(396)
+											left vwpc(0)
+											+MQ_MAX(RES_WID_SMALL01)
+												top vwsp(601)
+												left vwsp(6)
+										.item
+											&.is-title
+												display flex
+												justify-content center
+												padding vwpc(7) vwpc(14)
+												background-color SITE_COLOR01
+												+MQ_MAX(RES_WID_SMALL01)
+													padding vwsp(7) vwsp(14)
+												.title
+													line-height 1
+													span
+														color #fff
+														fontPc(12)
+														font-weight 500
+														line-height 1
+														letter-spacing 0.02em
+														+MQ_MAX(RES_WID_SMALL01)
+															fontSp(14)
+											&.is-text
+												display flex
+												justify-content center
+												padding vwpc(7) vwpc(14)
+												background-color #fff
+												+MQ_MAX(RES_WID_SMALL01)
+													padding vwsp(7) vwsp(14)
+												.text
+													color #5C6777
+													fontPc(12)
+													font-weight 500
+													line-height 1.2
+													letter-spacing 0.02em
+													+MQ_MAX(RES_WID_SMALL01)
+														fontSp(10)
+													span
+														&.is-pcOnly
+															display inline
+															+MQ_MAX(RES_WID_SMALL01)
+																display none
+														&.is-spOnly
+															display none
+															+MQ_MAX(RES_WID_SMALL01)
+																display inline
+
 
 .c-topNewsSet01
 	padding vwpc(80) 0
 	background-color SITE_BG02
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(40)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(20)
 		.group
 			&.is-title
 				display flex
 				flex-direction column
 				gap vwpc(10)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
 			&.is-contents
 				display flex
 				flex-direction column
 				gap vwpc(40)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(20)
 				.block
 					&.is-contents
 						display flex
 						flex-direction column
 						padding-top vwpc(20)
+						+MQ_MAX(RES_WID_SMALL01)
+							padding-top vwsp(20)
 						.area
 							&.is-news
 								width 100%
-								border-bottom 1px solid #ccc
+								border-bottom vwpc(1) solid #ccc
+								+MQ_MAX(RES_WID_SMALL01)
+									border-bottom-width vwsp(1)
 								.box
 									&.is-inner
 										display flex
 										align-items center
 										gap vwpc(12)
 										padding vwpc(13) vwpc(10) vwpc(13) 0
-										&:hover
+										+MQ_MAX(RES_WID_SMALL01)
+											flex-wrap wrap
+											gap vwsp(12)
+											padding vwsp(13) 0
+										+MQ_HOVER()
 											.item
 												&.is-date
 													.date
@@ -1327,6 +1953,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 													fontPc(12)
 													line-height 1.7
 													transition color .3s
+													+MQ_MAX(RES_WID_SMALL01)
+														fontSp(10)
 											&.is-category
 												.category
 													padding vwpc(2) vwpc(7)
@@ -1336,12 +1964,18 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 													font-weight 700
 													border 1px solid #999
 													transition color .3s, border-color .3s
+													+MQ_MAX(RES_WID_SMALL01)
+														padding vwsp(2) vwsp(7)
+														fontSp(10)
 											&.is-title
 												.title
 													color #444
 													fontPc(13)
 													line-height 1.6
 													transition color .3s
+													+MQ_MAX(RES_WID_SMALL01)
+														width 100%
+														fontSp(13)
 					&.is-btn
 						display flex
 						justify-content center
@@ -1350,29 +1984,41 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	padding vwpc(80) 0
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
 	&>.l-contentsWidth
 		&>.componentWrapper
 			display flex
 			flex-direction column
 			gap vwpc(40)
+			+MQ_MAX(RES_WID_SMALL01)
+				gap vwsp(20)
 			&>.group
 				&.is-title
 					display flex
 					flex-direction column
 					gap vwpc(10)
+					+MQ_MAX(RES_WID_SMALL01)
+						gap vwsp(10)
 				&.is-contents
 					display flex
 					flex-direction column
 					gap vwpc(40)
+					+MQ_MAX(RES_WID_SMALL01)
+						gap vwsp(20)
 					&>.block
 						&.is-contents
 							display flex
 							flex-direction column
 							gap vwpc(14)
+							+MQ_MAX(RES_WID_SMALL01)
+								gap vwsp(14)
 							&>.area
 								&.is-tabParent
 									display flex
 									gap vwpc(20)
+									+MQ_MAX(RES_WID_SMALL01)
+										gap vwsp(10)
 									&>.box
 										&.is-tabItem
 											display flex
@@ -1381,12 +2027,14 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 											position relative
 											padding vwpc(6) vwpc(10)
 											cursor pointer
+											+MQ_MAX(RES_WID_SMALL01)
+												padding vwsp(6) vwsp(10)
 											&.is-active
 												span
 													color SITE_COLOR01
 												&:after
 													opacity 1
-											&:hover
+											+MQ_HOVER()
 												span
 													color SITE_COLOR01
 												&:after
@@ -1403,15 +2051,21 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 												opacity 0
 												pointer-events none
 												transition opacity .3s
+												+MQ_MAX(RES_WID_SMALL01)
+													height vwsp(2)
 											span
 												color #666
 												fontPc(20)
 												font-weight 700
 												line-height 1.5
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(16)
 								&.is-tabChild
 									display none
 									flex-direction column
 									gap vwpc(14)
+									+MQ_MAX(RES_WID_SMALL01)
+										gap vwsp(14)
 									&.is-active
 										display flex
 						&.is-btn
@@ -1431,6 +2085,9 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				position relative
 				padding vwpc(20) vwpc(60) vwpc(20) vwpc(20)
 				background-color #F5FBFF
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
+					padding vwsp(20) vwsp(31) vwsp(20) vwsp(10)
 				cursor pointer
 				&:before, &:after
 					content ''
@@ -1443,9 +2100,15 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 					width vwpc(20)
 					height vwpc(3)
 					background-color SITE_COLOR01
+					border-radius vwpc(10)
 					transform-origin center
 					transform rotate(0deg)
 					transition transform .3s
+					+MQ_MAX(RES_WID_SMALL01)
+						right vwsp(10)
+						width vwsp(16)
+						height vwsp(3)
+						border-radius vwsp(10)
 				&:after
 					transform rotate(-90deg)
 
@@ -1458,18 +2121,29 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 							font-weight 700
 							line-height 1.5
 							letter-spacing 0.04em
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(20)
 					&.is-title
 						.title
 							fontPc(20)
 							font-weight 700
 							line-height 1.5
 							letter-spacing 0.04em
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(15)
 			&.is-answer
-				display none
+				display flex
 				align-items center
 				gap vwpc(10)
-				padding vwpc(20)
+				max-height 0
+				padding 0 vwpc(20)
+				overflow hidden
+				box-sizing border-box
 				background-color #fff
+				transition max-height .3s ease, padding .3s ease
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
+					padding 0 vwsp(10)
 				.block
 					&.is-answer
 						.text
@@ -1479,16 +2153,27 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 							font-weight 700
 							line-height 1.5
 							letter-spacing 0.04em
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(20)
 					&.is-text
 						.text
 							fontPc(16)
 							line-height 1.5
 							letter-spacing 0.04em
+							+MQ_MAX(RES_WID_SMALL01)
+								fontSp(16)
 	&.is-active
 		&>.componentWrapper
-			.group.is-question
-				&:after
-					transform rotate(0deg)
+			.group
+				&.is-answer
+					max-height vwpc(800)
+					padding vwpc(20)
+					+MQ_MAX(RES_WID_SMALL01)
+						max-height vwsp(800)
+						padding vwsp(10)
+				&.is-question
+					&:after
+						transform rotate(0deg)
 
 
 .c-topLinkSet02
@@ -1496,11 +2181,21 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	background-color SITE_BG03
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(40)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(20)
 		.group
+			&.is-title
+				display flex
+				flex-direction column
+				gap vwpc(10)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(10)
 			&.is-list
 				display grid
 				grid-template-columns repeat(3, 1fr)
@@ -1508,15 +2203,23 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				max-width vwpc(1090)
 				width 100%
 				margin 0 auto
+				+MQ_MAX(RES_WID_SMALL01)
+					grid-template-columns 1fr
+					grid-template-rows none
+					gap vwsp(14)
+					max-width 100%
 				.block
 					&.is-item
 						border-radius vwpc(8)
 						overflow hidden
 						box-shadow 0 0 vwpc(20) rgba(172, 197, 215, 0.3)
+						+MQ_MAX(RES_WID_SMALL01)
+							border-radius vwsp(8)
+							box-shadow 0 0 vwsp(20) rgba(172, 197, 215, 0.3)
 						.area
 							&.is-inner
 								display flex
-								&:hover
+								+MQ_HOVER()
 									.box
 										&.is-title
 											background-color SITE_COLOR01
@@ -1526,6 +2229,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									&.is-image
 										width vwpc(140)
 										flex-shrink 0
+										+MQ_MAX(RES_WID_SMALL01)
+											width vwsp(140)
 										img
 											width 100%
 											height auto
@@ -1538,12 +2243,16 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 										background-color #fff
 										box-sizing border-box
 										transition background-color .3s
+										+MQ_MAX(RES_WID_SMALL01)
+											padding vwsp(20) vwsp(10) vwsp(22) vwsp(14)
 										.title
 											color DF_TEXT_COLOR
 											fontPc(16)
 											font-weight 700
 											line-height 1.8
 											transition color .3s
+											+MQ_MAX(RES_WID_SMALL01)
+												fontSp(16)
 
 
 
@@ -1552,10 +2261,14 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 	background-color SITE_BG04
 	overflow hidden
 	box-sizing border-box
+	+MQ_MAX(RES_WID_SMALL01)
+		padding vwsp(40) 0 vwsp(28)
 	.componentWrapper
 		display flex
 		flex-direction column
 		gap vwpc(24)
+		+MQ_MAX(RES_WID_SMALL01)
+			gap vwsp(24)
 		.group
 			&.is-contents
 				display flex
@@ -1566,6 +2279,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 						flex-direction column
 						gap vwpc(16)
 						flex-shrink 0
+						+MQ_MAX(RES_WID_SMALL01)
+							gap vwsp(16)
 						.area
 							&.is-title
 								.title
@@ -1573,6 +2288,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									fontPc(14)
 									font-weight 700
 									line-height 1.7
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(14)
 							&.is-copy
 								.copy
 									color #fff
@@ -1580,22 +2297,31 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									font-family DF_FONT_MIN
 									font-weight 500
 									line-height 1.5
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(20)
 							&.is-text
 								.text
 									color #fff
 									fontPc(11)
 									line-height 1.5
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(12)
 							&.is-sns
 								display flex
 								gap vwpc(10)
 								padding-top vwpc(5)
+								+MQ_MAX(RES_WID_SMALL01)
+									gap vwsp(10)
+									padding-top vwsp(6)
 								.sns
 									width vwpc(32)
+									+MQ_MAX(RES_WID_SMALL01)
+										width vwsp(32)
 									a
 										display block
 										width 100%
 										transition opacity .3s
-										&:hover
+										+MQ_HOVER()
 											opacity 0.7
 										img
 											width 100%
@@ -1607,6 +2333,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 						grid-template-columns repeat(4, 1fr)
 						gap vwpc(20)
 						flex 1
+						+MQ_MAX(RES_WID_SMALL01)
+							display none
 						.area
 							&.is-section
 								display flex
@@ -1635,18 +2363,22 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 													fontPc(12)
 													line-height 1.7
 													transition color .3s
-													&:hover
+													+MQ_HOVER()
 														color SITE_COLOR01
 
 			&.is-copy
 				display flex
 				justify-content space-between
 				gap vwpc(20)
+				+MQ_MAX(RES_WID_SMALL01)
+					gap vwsp(20)
 				.block
 					&.is-nav
 						display flex
 						align-items center
 						gap vwpc(18)
+						+MQ_MAX(RES_WID_SMALL01)
+							gap vwsp(18)
 						.area
 							&.is-link
 								a
@@ -1654,13 +2386,16 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									fontPc(11)
 									line-height 1.7
 									transition color .3s
-									&:hover
+									+MQ_MAX(RES_WID_SMALL01)
+										fontSp(10)
+									+MQ_HOVER()
 										color SITE_COLOR01
 					&.is-copy
+						+MQ_MAX(RES_WID_SMALL01)
+							display none
 						.copy
 							color #666
 							fontPc(11)
 							line-height 1.7
-
 
 

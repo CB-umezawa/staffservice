@@ -2,6 +2,7 @@ $(function () {
 initHeaderOffset();
 smoothScroll();
 initHeaderMegaMenu();
+initHeader02();
 initFaqTab();
 initQaAccordion();
 });
@@ -103,6 +104,64 @@ $mega.on('mouseenter', function () {
 });
 }
 
+function initHeader02() {
+var $header = $('.js-header02');
+
+if (!$header.length) {
+	return;
+}
+
+var $menuBtn = $header.find('.js-header02MenuBtn .btn');
+var $nav = $header.find('.js-header02Nav');
+
+var closeMenu = function () {
+	$header.removeClass('is-active');
+	$menuBtn.attr('aria-expanded', 'false');
+	$('body').removeClass('is-header02Open');
+};
+
+var openMenu = function () {
+	$header.addClass('is-active');
+	$menuBtn.attr('aria-expanded', 'true');
+	$('body').addClass('is-header02Open');
+};
+
+$header.find('.js-header02MenuBtn').on('click', function () {
+	if ($header.hasClass('is-active')) {
+	closeMenu();
+	} else {
+	openMenu();
+	}
+});
+
+$header.find('.js-header02AccordionHead').on('click', function () {
+	var $item = $(this).closest('.js-header02AccordionItem');
+	var $body = $item.find('.js-header02AccordionBody');
+
+	$item.toggleClass('is-active');
+
+	if ($item.hasClass('is-active')) {
+	$body.stop(true, true).slideDown(300);
+	} else {
+	$body.stop(true, true).slideUp(300);
+	}
+});
+
+$header.find('.js-header02Nav a').on('click', function () {
+	closeMenu();
+	$header.find('.js-header02AccordionItem').removeClass('is-active');
+	$header.find('.js-header02AccordionBody').hide();
+});
+
+$(window).on('resize', function () {
+	if (window.innerWidth > 768) {
+	closeMenu();
+	$header.find('.js-header02AccordionItem').removeClass('is-active');
+	$header.find('.js-header02AccordionBody').hide();
+	}
+});
+}
+
 function initFaqTab() {
 $('.js-faqTab').each(function () {
 	var $tab = $(this);
@@ -125,17 +184,6 @@ $('.js-faqTab').each(function () {
 
 function initQaAccordion() {
 $('.c-qaSet01 .group.is-question').on('click', function () {
-	var $qa = $(this).closest('.c-qaSet01');
-	var $answer = $qa.find('.group.is-answer');
-
-	$qa.toggleClass('is-active');
-
-	if ($qa.hasClass('is-active')) {
-	$answer.stop(true, true).slideDown(300, function () {
-		$(this).css('display', 'flex');
-	});
-	} else {
-	$answer.stop(true, true).slideUp(300);
-	}
+	$(this).closest('.c-qaSet01').toggleClass('is-active');
 });
 }
