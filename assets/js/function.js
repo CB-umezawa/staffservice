@@ -79,9 +79,11 @@ var closeMega = function () {
 };
 
 var openMega = function ($item) {
-	$megaItems.not($item).removeClass('is-open');
+	var index = $item.index();
+
+	$megaItems.removeClass('is-open');
 	$item.addClass('is-open');
-	$mega.addClass('is-open');
+	$mega.removeClass('is-open').eq(index).addClass('is-open');
 };
 
 $wrap.on('mouseleave', function () {
@@ -90,13 +92,7 @@ $wrap.on('mouseleave', function () {
 
 $navItems.on('mouseenter', function () {
 	clearTimeout(timer);
-	var $item = $(this);
-
-	if ($item.hasClass('js-headerNavMega')) {
-	openMega($item);
-	} else {
-	closeMega();
-	}
+	openMega($(this));
 });
 
 $mega.on('mouseenter', function () {

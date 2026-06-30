@@ -480,11 +480,7 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 			border-width vwsp(1)
 			border-radius vwsp(8)
 		+MQ_HOVER()
-			background-color DF_TEXT_COLOR
-			&:after
-				background-image url('../images/common/common_arrow01_white.png')
-			span
-				color #fff
+			background-color #F4F4F4
 		&:after
 			content ''
 			display inline-block
@@ -527,13 +523,8 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 				span
 					color SITE_COLOR01
 			+MQ_HOVER()
-				background-color SITE_COLOR01
-				color #fff
-				&:after
-					background-image url('../images/common/common_arrow01_white.png')
-				.moduleInner
-					span
-						color #fff
+				background-color #ECF7FE
+
 
 	.moduleWrapper
 		display flex
@@ -660,6 +651,18 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									> .link
 										&:link, &:visited
 											color #666
+									&.is-active
+										background-color SITE_COLOR01
+
+										> .label,
+										> .link
+											color #fff
+
+										> .link
+											&:link, &:visited
+												color #fff
+												text-decoration none
+
 
 									+MQ_HOVER()
 										background-color SITE_COLOR01
@@ -707,7 +710,6 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 
 							.l-contentsWidth
 								display flex
-								justify-content center
 								align-items center
 								gap vwpc(40)
 								padding vwpc(10) vwpc(50)
@@ -1435,11 +1437,47 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 									gap vwsp(20)
 								.note
 									color #fff
-									fontPc(11)
+									fontPc(14)
 									line-height 1.5
-									text-align center
 									+MQ_MAX(RES_WID_SMALL01)
 										fontSp(11)
+								.link
+									a
+										display flex
+										align-items center
+										justify-content center
+										gap vwpc(20)
+										padding vwpc(14) vwpc(10)
+										border-bottom vwpc(2) solid #fff
+										box-sizing border-box
+										transition opacity .3s
+										+MQ_MAX(RES_WID_SMALL01)
+											gap vwsp(20)
+											padding vwsp(10) vwsp(10)
+											border-bottom-width vwsp(2)
+										+MQ_HOVER()
+											opacity 0.7
+										&:after
+											content ''
+											display inline-block
+											width vwpc(14)
+											height vwpc(12)
+											background-image url('../images/common/common_arrow01_white.png')
+											background-repeat no-repeat
+											background-size contain
+											background-position center
+											+MQ_MAX(RES_WID_SMALL01)
+												width vwsp(14)
+												height vwsp(12)
+										span
+											color #fff
+											fontPc(16)
+											font-weight 700
+											line-height 1.5
+											letter-spacing 0.04em
+											+MQ_MAX(RES_WID_SMALL01)
+												fontSp(16)
+
 							&.is-contents
 								display flex
 								flex-direction column
@@ -1482,6 +1520,16 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 												font-family DF_FONT_EN
 												font-weight 700
 												line-height vwpc(54)
+												+MQ_MAX(RES_WID_SMALL01)
+													fontSp(46)
+													line-height vwsp(54)
+											.text
+												color SITE_COLOR01
+												fontPc(60)
+												font-family DF_FONT_EN
+												font-weight 700
+												line-height vwpc(54)
+												letter-spacing -0.0162em
 												+MQ_MAX(RES_WID_SMALL01)
 													fontSp(46)
 													line-height vwsp(54)
@@ -2060,14 +2108,12 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 												line-height 1.5
 												+MQ_MAX(RES_WID_SMALL01)
 													fontSp(16)
-								&.is-tabChild
-									display none
+								&.is-qaList
+									display flex
 									flex-direction column
 									gap vwpc(14)
 									+MQ_MAX(RES_WID_SMALL01)
 										gap vwsp(14)
-									&.is-active
-										display flex
 						&.is-btn
 							display flex
 							justify-content center
@@ -2222,9 +2268,9 @@ $contentsWidth = vwpc(1180) + vwpc(100)
 								+MQ_HOVER()
 									.box
 										&.is-title
-											background-color SITE_COLOR01
+											background-color #ECF7FE
 											.title
-												color #fff
+												color SITE_COLOR01
 								.box
 									&.is-image
 										width vwpc(140)

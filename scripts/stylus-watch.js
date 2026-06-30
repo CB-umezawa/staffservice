@@ -18,8 +18,17 @@ function compile() {
 					return;
 				}
 
+				if (fs.existsSync(OUTPUT)) {
+					const existing = fs.readFileSync(OUTPUT, 'utf8');
+
+					if (existing === css) {
+						resolve({ written: false });
+						return;
+					}
+				}
+
 				fs.writeFileSync(OUTPUT, css);
-				resolve();
+				resolve({ written: true });
 			});
 	});
 }
@@ -39,7 +48,11 @@ function logSuccess() {
 
 function run() {
 	compile()
-		.then(logSuccess)
+		.then(({ written }) => {
+			if (written) {
+				logSuccess();
+			}
+		})
 		.catch((err) => {
 			logError(err);
 

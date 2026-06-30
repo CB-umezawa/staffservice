@@ -516,13 +516,7 @@ a:focus {
 }
 @media screen and (min-width: 769px) {
   .m-btn02 .moduleWrapper:hover {
-    background-color: #333;
-  }
-  .m-btn02 .moduleWrapper:hover:after {
-    background-image: url("../images/common/common_arrow01_white.png");
-  }
-  .m-btn02 .moduleWrapper:hover span {
-    color: #fff;
+    background-color: #f4f4f4;
   }
 }
 .m-btn02 .moduleWrapper:after {
@@ -573,14 +567,7 @@ a:focus {
 }
 @media screen and (min-width: 769px) {
   .m-contactBtn01.is-white .moduleWrapper:hover {
-    background-color: #007ed7;
-    color: #fff;
-  }
-  .m-contactBtn01.is-white .moduleWrapper:hover:after {
-    background-image: url("../images/common/common_arrow01_white.png");
-  }
-  .m-contactBtn01.is-white .moduleWrapper:hover .moduleInner span {
-    color: #fff;
+    background-color: #ecf7fe;
   }
 }
 .m-contactBtn01 .moduleWrapper {
@@ -726,6 +713,18 @@ a:focus {
 .c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link > .link:visited {
   color: #666;
 }
+.c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link.is-active {
+  background-color: #007ed7;
+}
+.c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link.is-active > .label,
+.c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link.is-active > .link {
+  color: #fff;
+}
+.c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link.is-active > .link:link,
+.c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link.is-active > .link:visited {
+  color: #fff;
+  text-decoration: none;
+}
 @media screen and (min-width: 769px) {
   .c-header01 .block.is-nav .area.is-nav .box.is-nav > .item.is-link:hover {
     background-color: #007ed7;
@@ -778,7 +777,6 @@ a:focus {
 }
 .c-header01 .block.is-nav .area.is-nav .box.is-mega .l-contentsWidth {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 2.857142857142857vw;
   padding: 0.714285714285714vw 3.571428571428571vw;
@@ -1685,15 +1683,66 @@ a:focus {
 }
 .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .note {
   color: #fff;
-  font-size: 11px;
-  font-size: 0.785714285714286vw;
+  font-size: 14px;
+  font-size: 1vw;
   line-height: 1.5;
-  text-align: center;
 }
 @media screen and (max-width: 768px) {
   .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .note {
     font-size: 11px;
     font-size: 2.933333333333333vw;
+  }
+}
+.c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.428571428571428vw;
+  padding: 1vw 0.714285714285714vw;
+  border-bottom: 0.142857142857143vw solid #fff;
+  box-sizing: border-box;
+  transition: opacity 0.3s;
+}
+@media screen and (max-width: 768px) {
+  .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a {
+    gap: 5.333333333333333vw;
+    padding: 2.666666666666667vw 2.666666666666667vw;
+    border-bottom-width: 0.533333333333333vw;
+  }
+}
+@media screen and (min-width: 769px) {
+  .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a:hover {
+    opacity: 0.7;
+  }
+}
+.c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a:after {
+  content: '';
+  display: inline-block;
+  width: 1vw;
+  height: 0.857142857142857vw;
+  background-image: url("../images/common/common_arrow01_white.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+@media screen and (max-width: 768px) {
+  .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a:after {
+    width: 3.733333333333333vw;
+    height: 3.2vw;
+  }
+}
+.c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a span {
+  color: #fff;
+  font-size: 16px;
+  font-size: 1.142857142857143vw;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+@media screen and (max-width: 768px) {
+  .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-link .link a span {
+    font-size: 16px;
+    font-size: 4.266666666666667vw;
   }
 }
 .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-contents {
@@ -1758,6 +1807,22 @@ a:focus {
 }
 @media screen and (max-width: 768px) {
   .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-contents .box.is-achievements .achievements .number {
+    font-size: 46px;
+    font-size: 12.266666666666666vw;
+    line-height: 14.4vw;
+  }
+}
+.c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-contents .box.is-achievements .achievements .text {
+  color: #007ed7;
+  font-size: 60px;
+  font-size: 4.285714285714286vw;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  line-height: 3.857142857142857vw;
+  letter-spacing: -0.0162em;
+}
+@media screen and (max-width: 768px) {
+  .c-topAchievementsSet01 .componentWrapper .group.is-contents .block.is-list .area.is-contents .box.is-achievements .achievements .text {
     font-size: 46px;
     font-size: 12.266666666666666vw;
     line-height: 14.4vw;
@@ -2625,18 +2690,15 @@ a:focus {
     font-size: 4.266666666666667vw;
   }
 }
-.c-topFaqSet01>.l-contentsWidth>.componentWrapper>.group.is-contents>.block.is-contents>.area.is-tabChild {
-  display: none;
+.c-topFaqSet01>.l-contentsWidth>.componentWrapper>.group.is-contents>.block.is-contents>.area.is-qaList {
+  display: flex;
   flex-direction: column;
   gap: 1vw;
 }
 @media screen and (max-width: 768px) {
-  .c-topFaqSet01>.l-contentsWidth>.componentWrapper>.group.is-contents>.block.is-contents>.area.is-tabChild {
+  .c-topFaqSet01>.l-contentsWidth>.componentWrapper>.group.is-contents>.block.is-contents>.area.is-qaList {
     gap: 3.733333333333333vw;
   }
-}
-.c-topFaqSet01>.l-contentsWidth>.componentWrapper>.group.is-contents>.block.is-contents>.area.is-tabChild.is-active {
-  display: flex;
 }
 .c-topFaqSet01>.l-contentsWidth>.componentWrapper>.group.is-contents>.block.is-btn {
   display: flex;
@@ -2834,10 +2896,10 @@ a:focus {
 }
 @media screen and (min-width: 769px) {
   .c-topLinkSet02 .componentWrapper .group.is-list .block.is-item .area.is-inner:hover .box.is-title {
-    background-color: #007ed7;
+    background-color: #ecf7fe;
   }
   .c-topLinkSet02 .componentWrapper .group.is-list .block.is-item .area.is-inner:hover .box.is-title .title {
-    color: #fff;
+    color: #007ed7;
   }
 }
 .c-topLinkSet02 .componentWrapper .group.is-list .block.is-item .area.is-inner .box.is-image {
